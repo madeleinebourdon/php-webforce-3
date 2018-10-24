@@ -11,7 +11,15 @@ require_once(__DIR__.'/../config/config.php');
     <meta name="author" content="">
     <link rel="icon" href="assets/ico/favicon.ico">
 
-    <title>Pizza Store</title>
+    <title>
+    <?php 
+    if(empty($currentPageTitle)) { // si on est sur la page d'accueil
+        echo $siteName . ' - Notre pizzeria en ligne';
+    } else { // si on est sur une autre page
+        echo $currentPageTitle . ' - ' . $siteName;
+    }
+     ?>
+    </title>
 
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/4.1/examples/starter-template/starter-template.css" rel="stylesheet">

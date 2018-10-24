@@ -12,7 +12,7 @@
 $siteName = 'Pizza Store';
 
 // Page courante et titre de balise title
-$currentPageTitle = null;
+// $currentPageTitle = null;
 $currentPageUrl = basename($_SERVER['REQUEST_URI'], '.php');
 
 ?>
