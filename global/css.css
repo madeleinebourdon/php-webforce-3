@@ -1,0 +1,74 @@
+/* Calculator.php */
+body {
+    font-family: "Arimo", sans-serif;
+    background-color: #1B1464;
+    background-image: url(fox.jpg);
+    background-size: cover;
+    background-position: 40% 25%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h1, h2 {
+    font-family: "Asap", sans-serif;
+}
+h1 {
+    text-align: center;
+    color: #1289A7;
+    margin-top: 0;
+}
+h2 {
+    color: #1B1464;
+}
+strong {
+    color: #1289A7;
+}
+
+.content {
+    padding: 1rem;
+    background: #f2f2f2;
+    max-width: 1300px;
+    margin: auto;
+    border: 3px solid #1289A7;
+    border-radius: 4px;
+}
+
+form {
+    line-height: 1.7rem;
+    max-width: 600px;
+    padding: 1.5rem;
+}
+form input[type=number] {
+    text-align: center;
+    width: 6.5rem;
+}
+label {
+    min-width: 6rem;
+    text-align: right;
+    padding-right: 0.5rem;
+}
+.button {
+    background-color: #1289A7;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    margin: 0.5rem;
+    font-size: 1rem;
+}
+
+.result {
+    background-color: #1B1464;
+    color: white;
+    border-radius: 4px;
+    padding: 1rem;
+}
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+/* for debugging purposes */
+.xdebug-var-dump {
+    background: black;
+    color: white;
+}
