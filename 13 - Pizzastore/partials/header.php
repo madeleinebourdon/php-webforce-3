@@ -1,3 +1,7 @@
+<?php
+require_once(__DIR__.'/../config/config.php');
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,20 +13,11 @@
 
     <title>Pizza Store</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
     <link href="https://getbootstrap.com/docs/4.1/examples/starter-template/starter-template.css" rel="stylesheet">
   </head>
 
   <body>
-  
-    <?php
-    // Si REQUEST_URI vaut /github/projet/fichier.php, $page renverra fichier
-    $page = basename($_SERVER['REQUEST_URI'], '.php'); 
-     ?>
-
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#">Pizza Store</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,10 +28,10 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item <?=($page === 'index') ? 'active' : ''; ?>">
+          <li class="nav-item <?=($currentPageUrl === 'index') ? 'active' : ''; ?>">
             <a class="nav-link" href="index.php">Accueil</a>
           </li>
-          <li class="nav-item <?=($page === 'pizza_list') ? 'active' : ''; ?>">
+          <li class="nav-item <?=($currentPageUrl === 'pizza_list') ? 'active' : ''; ?>">
             <a class="nav-link" href="pizza_list.php">Liste des pizzas</a>
           </li>
         </ul>
