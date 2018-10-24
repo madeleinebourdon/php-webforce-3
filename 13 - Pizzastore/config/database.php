@@ -6,7 +6,9 @@ try {
     ]);
 } catch(Exception $e) {
     echo $e->getMessage();
-    header('Location: https://www.google.fr/search?q=' . $e->getMessage());
+    echo '<img src="assets/img/ghost-sad.gif" alt="error">';
+    die('Stop');
+    // header('Location: https://www.google.fr/search?q=' . $e->getMessage());
 }
 
 $query = $db -> query('SELECT * FROM pizza');
