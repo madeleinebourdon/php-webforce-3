@@ -17,6 +17,11 @@
   </head>
 
   <body>
+  
+    <?php
+    // Si REQUEST_URI vaut /github/projet/fichier.php, $page renverra fichier
+    $page = basename($_SERVER['REQUEST_URI'], '.php'); 
+     ?>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <a class="navbar-brand" href="#">Pizza Store</a>
@@ -24,13 +29,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
+
+
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Accueil</a>
+          <li class="nav-item <?=($page === 'index') ? 'active' : ''; ?>">
+            <a class="nav-link" href="index.php">Accueil</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Liste des pizzas</a>
+          <li class="nav-item <?=($page === 'pizza_list') ? 'active' : ''; ?>">
+            <a class="nav-link" href="pizza_list.php">Liste des pizzas</a>
           </li>
         </ul>
       </div>
