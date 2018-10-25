@@ -17,3 +17,18 @@ L'intérêt est de pouvoir recréer la structure de la base à tout moment.
 - assets/css/style.css
 - assets/js/script.js
 - assets/img/
+
+
+## Ajout d'une pizza
+- Créer la page pizza_add.php (Permettra d'ajouter une pizza côté administrateur)
+- Ne pas oublier le header et le footer
+- Ajouter un titre "Ajouter une pizza"
+- Ajouter un formulaire avec les champs suivants :
+    - Nom : saisie libre
+    - Prix : entre 5 et 19.99
+    - Image : saisie libre
+    - Description : saisie libre
+    - Catégorie : select
+- Faire le traitement du formulaire (vérifier les données)
+- Modifier la base de données pour ajouter le champ description (TEXT) et catégorie (VARCHAR ou ENUM) dans la table pizza
+- Ajouter la pizza dans la base avec une requête quand on clique sur le bouton submit du formulaire
