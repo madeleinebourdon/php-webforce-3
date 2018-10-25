@@ -1,0 +1,75 @@
+body {
+    background-image: url('../img/wallpaper.jpg');
+    background-color: #dedddb!important;
+    background-attachment: fixed;
+    background-size: cover;
+
+    font-family: 'Nunito', sans-serif!important;
+}
+
+h1, h2, h3, .navbar-brand {
+    font-family: 'Kalam', cursive!important;
+}
+
+
+.page-title {
+    padding: 1rem;
+}
+
+.card {
+    margin-bottom: 1.5rem;
+}
+.card-img {
+    overflow: hidden;
+    height: 250px;
+    position: relative;
+    border-radius: 0px!important;
+    border-top-right-radius: calc(.25rem - 1px);
+    border-top-left-radius: calc(.25rem - 1px);
+}
+.img-price {
+    font-size: 1rem;
+    background-color: white;
+    padding: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 10px 0 0 0;
+    z-index: 10;
+}
+.img-price-cents {
+    font-size: 0.7rem;
+    top: 0;
+
+    position: relative;
+}
+
+.card-img-top {
+    min-height: 250px;
+    object-fit: cover;
+}
+.card-img-top:hover {
+    transform: scale(1.1);
+    transition-duration: 0.15s;
+}
+
+
+.card-body {
+    text-align: center;
+}
+.pizza-description {
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+/* Pizza single */
+.pizza-single-img {
+    padding: 0!important;
+}
+.pizza-single-img img{
+    max-width: 100%;
+}
+.price {
+    font-weight: bold;
+    font-size: 1.5rem;
+}

@@ -2,6 +2,7 @@
 require_once(__DIR__.'/../config/config.php');
 
 require_once(__DIR__ . '/../config/database.php');
+require_once(__DIR__ . '/../config/functions.php');
 ?>
 
 <!doctype html>
@@ -11,6 +12,8 @@ require_once(__DIR__ . '/../config/database.php');
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Kalam|Nunito" rel="stylesheet"> 
+    <link href="assets/css/main.css" rel="stylesheet">
     <link rel="icon" href="assets/ico/favicon.ico">
 
     <title>
@@ -42,7 +45,7 @@ require_once(__DIR__ . '/../config/database.php');
             <a class="nav-link" href="index.php">Accueil</a>
           </li>
           <li class="nav-item <?=($currentPageUrl === 'pizza_list') ? 'active' : ''; ?>">
-            <a class="nav-link" href="pizza_list.php">Liste des pizzas</a>
+            <a class="nav-link" href="pizza_list.php">Nos pizzas</a>
           </li>
         </ul>
       </div>
