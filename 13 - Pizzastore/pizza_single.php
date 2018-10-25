@@ -65,7 +65,10 @@ require_once(__DIR__.'/partials/header.php'); ?>
             <?php 
             $query = $db -> query('SELECT * FROM pizza');
             $pizzas = $query->fetchAll();
-            foreach ($pizzas as $pizza) {?>    
+            foreach ($pizzas as $pizza) {
+                if ($id === $pizza['id']) { // ignorer la pizza actuelle dans les suggestions
+                }
+                else {?>    
         <div class="col-md-2">
                 <div class="card">
                     <div class="card-img">
@@ -80,7 +83,7 @@ require_once(__DIR__.'/partials/header.php'); ?>
                     </div>
                 </div>
             </div>
-            <?php } ?>
+            <?php }} ?>
     </div>
 </main>
 

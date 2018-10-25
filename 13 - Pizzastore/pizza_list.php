@@ -19,7 +19,7 @@ require_once(__DIR__.'/partials/header.php'); ?>
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-img">
-                        <?php echo "<img src='assets/" . $pizza['image'] . "' class='card-img-top'>"; ?>
+                        <?php echo "<a href='pizza_single.php?id=" . $pizza['id'] . "'><img src='assets/" . $pizza['image'] . "' class='card-img-top'></a>"; ?>
                         <span class="img-price">
                             <?php echo formatPrice($pizza['price']); ?>
                         €</span>
