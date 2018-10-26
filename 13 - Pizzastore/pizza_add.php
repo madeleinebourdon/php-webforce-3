@@ -78,8 +78,8 @@ function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, 
             $errors[] = "Vous n'avez pas définie de description.<br>";
         }
 
-        if($pizzaCategory === "choose") { // si la catégorie est toujours celle de base
-            $errors[] = "Vous n'avez pas choisi de catégorie.<br>";
+        if(empty($pizzaCategory) || in_array($pizzaCategory, ['Base tomate', 'Base crème'])) { // si la catégorie est toujours celle de base
+            $errors[] = "La catégorie n'est pas valide.<br>";
         }
 
         if(empty($pizzaImage)) { // si la pizza n'a pas d'image
