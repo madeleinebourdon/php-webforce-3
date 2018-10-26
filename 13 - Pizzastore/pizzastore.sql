@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 25 oct. 2018 à 17:30
+-- Généré le :  ven. 26 oct. 2018 à 14:09
 -- Version du serveur :  10.1.26-MariaDB
 -- Version de PHP :  7.1.9
 
@@ -78,7 +78,7 @@ CREATE TABLE `pizza` (
   `price` decimal(11,2) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `description` text NOT NULL,
-  `slug` varchar(255) NOT NULL
+  `category` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -193,7 +193,7 @@ ALTER TABLE `order_detail`
 -- AUTO_INCREMENT pour la table `pizza`
 --
 ALTER TABLE `pizza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `size`
