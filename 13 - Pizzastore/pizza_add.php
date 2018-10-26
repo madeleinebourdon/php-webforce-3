@@ -4,7 +4,17 @@ require_once(__DIR__ . '/partials/header.php'); ?>
 
 <div class="container">
     <h1>Ajouter une pizza</h1>
-    <form method="POST" class="col-10 mx-auto">
+
+<?php if (isset($success) && $success) { ?>
+        <div class="alert alert-success alert-dismissible fade show">
+            La pizza <strong><?php echo $name; ?></strong> a bien été ajouté avec l'id <strong><?php echo $db->lastInsertId(); ?></strong> !
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+<?php } ?>
+
+    <form method="POST" enctype="multipart/form-data"  class="col-10 mx-auto">
     
         <div class="input-group mb-3"> <!-- pizza name -->
             <div class="input-group-prepend">
@@ -36,8 +46,11 @@ require_once(__DIR__ . '/partials/header.php'); ?>
             </select>
         </div>
         
-        <div class="mb-3"> <!-- image -->
-            <label for="fileToUpload">Image :</label> <input type="file" id="fileToUpload" name="image"><br>
+        <div class="input-group mb-3"> <!-- image -->
+        <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Image</label>
+            </div>
+            <input class="form-control" type="file" enctype="multipart/form-data" id="fileToUpload" name="image"><br>
         </div>
 
         <input type="submit" value="Ajouter la pizza" class="btn btn-success">
@@ -48,11 +61,13 @@ require_once(__DIR__ . '/partials/header.php'); ?>
     </form>
 </div>
 <?php
+
 function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, $pizzaImage) {
     global $db;
     $errors = [];
 
     if (!empty($_POST)) {
+
 
         // PIZZA NAME
         if (empty($pizzaName)) { // si le nom de la pizza est vide
@@ -62,11 +77,10 @@ function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, 
         }
 
         if (strlen($pizzaPrice) > 0){ // si le prix de la pizza n'est pas vide
-            if (is_numeric ($pizzaPrice)) { // si le prix de la pizza est numérique
-                // remplacer les virgules par des points dans l'envoi du formulaire
-
-            } else {
+            if (!is_numeric($pizzaPrice) || $pizzaPrice < 5 || $pizzaPrice > 19.99) { 
                 $errors[] = "Votre pizza a un prix invalide.<br>";
+            } else { // si le prix de la pizza est numérique
+                // remplacer les virgules par des points dans l'envoi du formulaire
             }
            
         } else {
@@ -78,30 +92,65 @@ function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, 
             $errors[] = "Vous n'avez pas définie de description.<br>";
         }
 
-        if(empty($pizzaCategory) || in_array($pizzaCategory, ['Base tomate', 'Base crème'])) { // si la catégorie est toujours celle de base
+        if(!empty($pizzaCategory) || in_array($pizzaCategory, ['Base tomate', 'Base crème'])) { // si la catégorie est toujours celle de base (à revoir)
+        } else {
             $errors[] = "La catégorie n'est pas valide.<br>";
         }
 
-        if(empty($pizzaImage)) { // si la pizza n'a pas d'image
+        if($pizzaImage['error'] === 4) { // erreur qui correspond à aucune image uploadée
             //mail($mail, $title, $message);
-            $errors[] = "Vous n'avez pas choisi d'image pour votre pizza.<br>";
+            $errors[] = "Vous n'avez pas envoyé d'image de pizza.<br>";
+        }else {
+            // $pizzaImage = "img/pizzas/" . $pizzaImage;
         }
+        
+        // ENVOI DE L'IMAGE
+        var_dump($pizzaImage);
+        $file = $pizzaImage['tmp_name']; // emplacement du fichier temporaire uploadé
+        $fileName = '/img/pizzas/' .$pizzaImage['name']; // variable pour la base de données
+
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file);
+        $allowedExtensions = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+        // si l'extension n'est pas autorisée
+        if (!in_array($mimeType, $allowedExtensions)) {
+            $errors['image'] = 'Ce type de fichier n\'est pas autorisé';
+        }
+
+        // Vérifier la taille du fichier
+        if ($pizzaImage['size'] > 2097152) { // si c'est plus gros que 2MB
+            $errors['image'] = 'L\'image est trop lourde !';
+            // echo "Attention ! Votre image est plus grosse que 2MB !";
+        }
+
+        if (!isset($errors['image'])) {
+            move_uploaded_file($file, __DIR__. '/assets/img/pizzas/'. $pizzaImage['name']); // on déplace le fichier uploadé là où on veut
+        }
+        
+        // fin de l'image
+
 
         if($errors == []) {
             $query = $db->prepare('
-                INSERT INTO pizza (`name`, `price`, `description`, `category`) VALUES (:name, :price, :description, :category)
+                INSERT INTO pizza (`name`, `price`, `description`, `category`, `image`) VALUES (:name, :price, :description, :category, :image)
             ');
             $query->bindValue(':name', $pizzaName, PDO::PARAM_STR);
             $query->bindValue(':price', $pizzaPrice, PDO::PARAM_STR);
             $query->bindValue(':description', $pizzaDescription, PDO::PARAM_STR);
             $query->bindValue(':category', $pizzaCategory, PDO::PARAM_STR);
-            //$query->bindValue(':image', $image, PDO::PARAM_STR);
+            $query->bindValue(':image', $pizzaImage, PDO::PARAM_STR);
+
+            
+
+
 
             if ($query->execute()) { // On insère la pizza dans la BDD
                 $success = true;
                 // Envoyer un mail ?
                 // Logger la création de la pizza
             }
+            echo "Votre pizza a bien été ajoutée.";
 
         } else {
             echo '<div class="error"><strong>Erreur :</strong><ul>';
@@ -109,14 +158,16 @@ function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, 
                 echo "<li>" . $error . "</li>";
             }
             echo "</ul>
-            Votre pizza n'a pu être ajoutée.</div>";
+            Votre pizza n'a pas pu être ajoutée.</div>";
         }
+    } else {
+        echo "truc est empty";
     } 
 }
 
-if (isset($_POST['name'], $_POST['price'], $_POST['description'], $_POST['category'], $_POST['image'])) {
+if (isset($_POST['name'], $_POST['price'], $_POST['description'], $_POST['category'], $_FILES['image'])) {
     echo "<div class='result container'><div class='col-10  mx-auto'>";
-    validation($_POST['name'], $_POST['price'], $_POST['description'], $_POST['category'], $_POST['image']);
+    validation($_POST['name'], $_POST['price'], $_POST['description'], $_POST['category'], $_FILES['image']);
     echo "</div></div>";
 }
 ?>
