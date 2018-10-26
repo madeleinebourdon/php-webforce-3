@@ -70,8 +70,8 @@ require_once(__DIR__.'/partials/header.php'); ?>
                 }
                 else {?>    
         <div class="col-md-2">
-                <div class="card">
-                    <div class="card-img">
+                <div class="card small">
+                    <div class="card-img small">
                         <?php echo "<a href='pizza_single.php?id=" . $pizza['id'] . "'><img src='assets/" . $pizza['image'] . "' class='card-img-top'></a>"; ?>
                         <span class="img-price">
                             <?php echo formatPrice($pizza['price']); ?>
