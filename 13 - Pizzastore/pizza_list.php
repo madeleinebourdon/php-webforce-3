@@ -7,6 +7,15 @@ require_once(__DIR__.'/partials/header.php'); ?>
     <main class="container">
         <div class="page-title">
         <h1>Nos pizzas</h1>
+        <div class="">
+            <form  method="GET">
+            <strong>Filtrer les résultats:</strong>
+                <input type="checkbox" name="check-tomato" id="check-tomato"> <label for="check-tomato">Base tomate</label>
+                <input type="checkbox" name="check-cream" id="check-cream"> <label for="check-cream">Base crème</label>
+                <input type="submit" class="btn">
+            </form>
+            
+        </div>
         </div>
         
         <div class="row">
