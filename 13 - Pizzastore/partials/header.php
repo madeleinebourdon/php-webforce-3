@@ -47,6 +47,12 @@ require_once(__DIR__ . '/../config/functions.php');
           <li class="nav-item <?=($currentPageUrl === 'pizza_list') ? 'active' : ''; ?>">
             <a class="nav-link" href="pizza_list.php">Nos pizzas</a>
           </li>
+          
+        </ul>
+        <ul class="navbar-nav ml-auto">
+        <li class="nav-item <?=($currentPageUrl === 'pizza_add') ? 'active' : ''; ?>">
+            <a class="nav-link" href="pizza_add.php">Ajouter une pizza</a>
+          </li>
         </ul>
       </div>
     </nav>
