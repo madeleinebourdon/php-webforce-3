@@ -67,6 +67,7 @@ function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, 
     $errors = [];
 
     if (!empty($_POST)) {
+        $pizzaImage = $_FILES['image'];
 
 
         // PIZZA NAME
@@ -139,7 +140,7 @@ function validation($pizzaName, $pizzaPrice, $pizzaDescription, $pizzaCategory, 
             $query->bindValue(':price', $pizzaPrice, PDO::PARAM_STR);
             $query->bindValue(':description', $pizzaDescription, PDO::PARAM_STR);
             $query->bindValue(':category', $pizzaCategory, PDO::PARAM_STR);
-            $query->bindValue(':image', $pizzaImage, PDO::PARAM_STR);
+            $query->bindValue(':image', $fileName, PDO::PARAM_STR);
 
             
 

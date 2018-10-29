@@ -7,12 +7,11 @@ require_once(__DIR__.'/partials/header.php'); ?>
     <main class="container">
         <div class="page-title">
         <h1>Nos pizzas</h1>
-        <div class="">
+        <div class="filters">
             <form  method="GET">
             <strong>Filtrer les résultats:</strong>
-                <input type="checkbox" name="check-tomato" id="check-tomato"> <label for="check-tomato">Base tomate</label>
-                <input type="checkbox" name="check-cream" id="check-cream"> <label for="check-cream">Base crème</label>
-                <input type="submit" class="btn">
+                <input type="checkbox" name="check-tomato" id="check-tomato" checked> <label for="check-tomato">Base tomate</label>
+                <input type="checkbox" name="check-cream" id="check-cream" checked> <label for="check-cream">Base crème</label>
             </form>
             
         </div>
@@ -25,7 +24,7 @@ require_once(__DIR__.'/partials/header.php'); ?>
         $pizzas = $query->fetchAll(); 
 
         foreach ($pizzas as $pizza) { ?>
-            <div class="col-md-3">
+            <div class="col-md-3 <?php echo $pizza['category'] ?>">
                 <div class="card">
                     <div class="card-img">
                         <?php echo "<a href='pizza_single.php?id=" . $pizza['id'] . "'><img src='assets/" . $pizza['image'] . "' class='card-img-top'></a>"; ?>
